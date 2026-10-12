@@ -191,5 +191,53 @@
       <h1 id="status">ابدأ التسبيح</h1>
       <button id="startBtn" onclick="startTasbeeh()">ابدأ</button>
     </div>
+
+    <script>
+      let StatusText = document.getElementById("status");
+      let StartButton = document.getElementById("startBtn");
+
+      let Orginalcolor = StatusText.color;
+
+      let counter = 0;
+
+      let calcote = 0;
+      let panting = "سبحان الله";
+      let colorfont = "white";
+
+      function startTasbeeh() {
+        StartButton.disabled = true;
+
+        let intervalid = setInterval(() => {
+          counter++;
+          StatusText.textContent = panting + " - " + counter;
+          StatusText.style.color = colorfont;
+
+          if (counter === 33) {
+            calcote++;
+            counter = 0;
+          }
+
+          if (calcote === 1) {
+            panting = "الحمدلله";
+            colorfont = "red";
+          } else if (calcote === 2) {
+            panting = "الله اكبر";
+            colorfont = "yellow";
+          } else if (calcote === 3) {
+            panting =
+              "لا اله الا الله وحده لا شريك له له الملك وله الحمد وهو على كل شي ان قدير";
+            colorfont = "green";
+          } else if (calcote === 4) {
+            alert("في ميزان حسناتكم");
+            StartButton.disabled = false;
+            clearInterval(intervalid);
+            calcote = 0;
+            counter = 0;
+            StatusText.style.color = Orginalcolor;
+            StatusText.textContent = "ابدأ التسبيح";
+          }
+        }, 100);
+      }
+    </script>
   </body>
 </html>
