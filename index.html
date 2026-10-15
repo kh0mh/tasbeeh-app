@@ -206,13 +206,13 @@
         {
           name: "لا اله الا الله وحده لا شريك له له الملك وله الحمد وهو على كل شي ان قدير",
           color: "green",
-          count: 2,
+          count: 1,
         },
       ];
 
       let counter = 0;
-
       let Index = 0;
+
       function startTasbeeh() {
         StartButton.disabled = true;
 
@@ -224,21 +224,23 @@
             (Athkar[Index].count > 1 ? " - " + counter : " ");
           StatusText.style.color = Athkar[Index].color;
 
-          if (counter >= Athkar[Index].count) {
+          if (counter === Athkar[Index].count) {
             counter = 0;
             Index++;
           }
 
           if (Index === Athkar.length) {
-            StatusText.style.color = Orginalcolor;
-            StatusText.textContent = OrginalText;
-
             clearInterval(intervalid);
-            alert("في ميزان حسناتكم");
-            counter = 0;
-            StartButton.disabled = false;
+
+            setTimeout(() => {
+              alert("في ميزان حسناتكم");
+              StatusText.style.color = Orginalcolor;
+              StatusText.textContent = OrginalText;
+              StartButton.disabled = false;
+              Index = 0;
+            }, 1000);
           }
-        }, 1000);
+        }, 500);
       }
     </script>
   </body>
