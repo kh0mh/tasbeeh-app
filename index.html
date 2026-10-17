@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>تسبيح</title>
-
+    <script src="script.js" defer></script>
     <!-- Noto Kufi Arabic -->
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;600;700&display=swap"
@@ -145,6 +145,36 @@
         background: #e6c75a;
       }
 
+      /* الحاوية الجديدة اللي هتتشال */
+      .feature-wrapper {
+        position: relative; /* عشان الـ overlay يمسك فيها */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+      }
+
+      .coming-soon-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8); /* غطاء أسود شفاف */
+        backdrop-filter: blur(1.5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--gold);
+        font-size: 1.3rem;
+        font-weight: bold;
+        z-index: 10;
+        border-radius: 10px;
+        pointer-events: auto;
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+      }
+
       /* The golden box */
       .box {
         background: linear-gradient(145deg, #111 0%, #000 100%);
@@ -251,74 +281,26 @@
       >ProgrammingAdvices.com</a
     >
     <div class="replacement-container">
-      <label for="newText">اكتب الذكر الجديد:</label>
-      <input type="text" id="newText" placeholder="اكتب هنا..." />
+      <div class="feature-wrapper">
+        <div class="coming-soon-overlay">قريباً ...</div>
 
-      <label for="oldMenu">اختر الذكر الذي تريد استبداله:</label>
-      <select id="oldMenu">
-        <option value="0">سبحان الله</option>
-        <option value="1">الحمد لله</option>
-        <option value="2">الله أكبر</option>
-      </select>
+        <label for="newText">اكتب الذكر الجديد:</label>
+        <input type="text" id="newText" placeholder="اكتب هنا..." />
 
-      <button id="replaceBtn">استبدال</button>
+        <label for="oldMenu">اختر الذكر الذي تريد استبداله:</label>
+        <select id="oldMenu">
+          <option value="0">سبحان الله</option>
+          <option value="1">الحمد لله</option>
+          <option value="2">الله أكبر</option>
+        </select>
+
+        <button id="replaceBtn">استبدال</button>
+      </div>
     </div>
     <!-- Golden Box -->
     <div class="box">
       <h1 id="status">ابدأ التسبيح</h1>
       <button id="startBtn" onclick="startTasbeeh()">ابدأ</button>
     </div>
-
-    <script>
-      let StatusText = document.getElementById("status");
-      let StartButton = document.getElementById("startBtn");
-
-      const Orginalcolor = getComputedStyle(StatusText).color;
-      const OrginalText = StatusText.textContent;
-
-      const Athkar = [
-        { name: "سبحان الله", color: "white", count: 33 },
-        { name: "الحمدلله", color: "yellow", count: 33 },
-        { name: "الله اكبر", color: "red", count: 33 },
-        {
-          name: "لا اله الا الله وحده لا شريك له له الملك وله الحمد وهو على كل شي ان قدير",
-          color: "green",
-          count: 1,
-        },
-      ];
-
-      let counter = 0;
-      let Index = 0;
-
-      function startTasbeeh() {
-        StartButton.disabled = true;
-
-        let intervalid = setInterval(() => {
-          counter++;
-
-          StatusText.textContent =
-            Athkar[Index].name +
-            (Athkar[Index].count > 1 ? " - " + counter : " ");
-          StatusText.style.color = Athkar[Index].color;
-
-          if (counter === Athkar[Index].count) {
-            counter = 0;
-            Index++;
-          }
-
-          if (Index === Athkar.length) {
-            clearInterval(intervalid);
-
-            setTimeout(() => {
-              alert("في ميزان حسناتكم");
-              StatusText.style.color = Orginalcolor;
-              StatusText.textContent = OrginalText;
-              StartButton.disabled = false;
-              Index = 0;
-            }, 1000);
-          }
-        }, 500);
-      }
-    </script>
   </body>
 </html>
