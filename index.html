@@ -53,6 +53,17 @@
         animation: glow 4s ease-in-out infinite alternate;
       }
 
+      #khLogo.logo {
+        left: 260px;
+        filter: drop-shadow(0 0 20px rgba(60, 57, 214, 0.6));
+      }
+
+      #khLink.site-link {
+        left: 290px;
+        text-shadow: 0 0 10px rgba(51, 67, 138, 0.6);
+        color: rgba(66, 66, 218, 0.938);
+      }
+
       /* ProgrammingAdvices.com link under logo */
       .site-link {
         position: absolute;
@@ -86,6 +97,52 @@
         100% {
           opacity: 0.9;
         }
+      }
+
+      .replacement-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 30px;
+        background: #111;
+        padding: 20px;
+        border: 2px solid var(--gold);
+        border-radius: 10px;
+      }
+
+      .replacement-container label {
+        color: var(--gold);
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      .replacement-container input,
+      .replacement-container select {
+        width: 300px;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid var(--gold);
+        background: #000;
+        color: #fff;
+        font-family: "Noto Kufi Arabic", sans-serif;
+        text-align: center;
+      }
+
+      .replacement-container button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        background: var(--gold);
+        color: #000;
+        font-weight: bold;
+        font-family: "Noto Kufi Arabic", sans-serif;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .replacement-container button:hover {
+        background: #e6c75a;
       }
 
       /* The golden box */
@@ -180,12 +237,32 @@
   <body>
     <!-- Logo -->
     <img src="logo.png" alt="Logo " class="logo" />
-
+    <img src="khLogo.PNG" alt="Logo " class="logo" id="khLogo" />
     <!-- Link under logo -->
+
+    <a
+      href="https://github.com/kh0mh"
+      target="_blank"
+      class="site-link"
+      id="khLink"
+      >khadija's Githup</a
+    >
     <a href="https://ProgrammingAdvices.com" target="_blank" class="site-link"
       >ProgrammingAdvices.com</a
     >
+    <div class="replacement-container">
+      <label for="newText">اكتب الذكر الجديد:</label>
+      <input type="text" id="newText" placeholder="اكتب هنا..." />
 
+      <label for="oldMenu">اختر الذكر الذي تريد استبداله:</label>
+      <select id="oldMenu">
+        <option value="0">سبحان الله</option>
+        <option value="1">الحمد لله</option>
+        <option value="2">الله أكبر</option>
+      </select>
+
+      <button id="replaceBtn">استبدال</button>
+    </div>
     <!-- Golden Box -->
     <div class="box">
       <h1 id="status">ابدأ التسبيح</h1>
