@@ -1,6 +1,8 @@
 let StatusText = document.getElementById("status");
 let StartButton = document.getElementById("startBtn");
 
+StartButton.addEventListener("click", startTasbeeh);
+
 const Orginalcolor = getComputedStyle(StatusText).color;
 const OrginalText = StatusText.textContent;
 
@@ -18,8 +20,18 @@ const Athkar = [
 let counter = 0;
 let Index = 0;
 
+function resetTasbeeh() {
+  counter = 0;
+  Index = 0;
+  StatusText.style.color = Orginalcolor;
+  StatusText.textContent = OrginalText;
+  StartButton.disabled = false;
+  StartButton.addEventListener("click", startTasbeeh);
+}
+
 function startTasbeeh() {
   StartButton.disabled = true;
+  StartButton.removeEventListener("click", startTasbeeh);
 
   let intervalid = setInterval(() => {
     counter++;
@@ -38,10 +50,7 @@ function startTasbeeh() {
 
       setTimeout(() => {
         alert("في ميزان حسناتكم");
-        StatusText.style.color = Orginalcolor;
-        StatusText.textContent = OrginalText;
-        StartButton.disabled = false;
-        Index = 0;
+        resetTasbeeh();
       }, 1000);
     }
   }, 500);
